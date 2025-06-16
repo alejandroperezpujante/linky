@@ -1,0 +1,18 @@
+*,
+::before,
+::after {
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --color-background: light-dark(oklch(100 0 0deg), oklch(0 0 0deg));
+    --color-foreground: light-dark(oklch(0 0 0deg), oklch(100 0 0deg));
+
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+
+    color-scheme: light dark;
+}
