@@ -14,6 +14,10 @@
         <main>
             <h1>Linky</h1>
             <p>Easy and straightforward link shortening service.</p>
+
+            <a href="{{ route('login') }}">
+                Get Started
+            </a>
         </main>
     </body>
 </html>
