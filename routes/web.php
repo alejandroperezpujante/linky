@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('', 'landing')->name('landing');
 
-Route::get('/{short_code}', LinkController::class)->name('link');
+Route::get('/link/{short_code}', LinkController::class)->name('link.external');
 
 Route::middleware('guest')->group(function () {
     Route::view('login', 'auth')->name('login');

@@ -41,4 +41,14 @@ class Link extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function isActive()
+    {
+        return $this->status === LinkStatus::ACTIVE;
+    }
+
+    public function isInactive()
+    {
+        return $this->status === LinkStatus::INACTIVE;
+    }
 }
