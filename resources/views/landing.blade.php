@@ -7,11 +7,11 @@
         <title>Linky</title>
 
         @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-            @vite(['resources/css/app.css'])
+            @vite(['vendor/picocss/pico/css/pico.css'])
         @endif
     </head>
-    <body>
-        <main>
+    <body class="container-fluid">
+        <main class="container">
             <h1>Linky</h1>
             <p>Easy and straightforward link shortening service.</p>
 

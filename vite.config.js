@@ -2,10 +2,9 @@ import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
 
 export default defineConfig({
-    css: { transformer: 'lightningcss' },
     plugins: [
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'],
             refresh: true,
         }),
     ],

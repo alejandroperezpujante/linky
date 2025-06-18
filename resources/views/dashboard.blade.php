@@ -9,11 +9,11 @@
     <title>Linky</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css'])
+        @vite(['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'])
     @endif
 </head>
-<body>
-<header>
+<body class="container-fluid">
+<header class="app-header">
     <h2>Linky</h2>
     <p>Welcome {{ $user->email }}</p>
 
@@ -26,7 +26,7 @@
 
 </header>
 
-<main>
+<main class="container">
         <h1>Your Recent Links</h1>
 
         @if($links->count() > 0)
@@ -55,26 +55,37 @@
                                 {{ $link->short_code }}
                             </a>
                         </td>
-                        <td>{{ LinkStatus::getLabel($link->status) }}</td>
-                        <td>{{ $link->created_at->diffForHumans() }}</td>
                         <td>
-                            <a href="{{ route('links.edit', $link) }}">Edit</a>
+                            <form action="{{ route('links.toggle', $link) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+
+                                <input
+                                    type="checkbox"
+                                    role="switch"
+                                    id="status"
+                                    name="status"
+                                    oninput="this.form.submit()"
+                                    @checked($link->isActive())
+                                />
+                            </form>
+                        </td>
+                        <td>
+                            {{ $link->created_at->diffForHumans() }}
+                        </td>
+                        <td class="table-actions">
                             <form method="POST" action="{{ route('links.destroy', $link) }}" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
                             </form>
-                            <form action="{{ route('links.toggle', $link) }}" method="post">
-                                @csrf
-                                @method('PATCH')
-
-                                <button type="submit">Toggle Status</button>
-                            </form>
+                            <a href="{{ route('links.edit', $link) }}">Edit</a>
                         </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
+            <a href="{{ route('links.index') }}">See All</a>
         @else
             <p>You haven't created any links yet.</p>
             <a href="{{ route('links.create') }}">Create your first link</a>

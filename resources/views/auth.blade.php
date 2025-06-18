@@ -7,11 +7,12 @@
     <title>Linky</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css'])
+        @vite(['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'])
     @endif
 </head>
-<body>
-<main>
+<body class="container-fluid">
+<main class="container">
+    <h1>Login</h1>
     <p>Enter your account credentials bellow.</p>
     <p>If you don't have an user yet, one will be created.</p>
 

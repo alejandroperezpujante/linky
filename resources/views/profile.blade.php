@@ -7,11 +7,11 @@
     <title>Linky</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css'])
+        @vite(['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'])
     @endif
 </head>
-<body>
-<header>
+<body class="container-fluid">
+<header class="app-header">
     <h2>Linky</h2>
     <p>Welcome {{ $user->email }}</p>
 
@@ -22,7 +22,7 @@
         <button type="submit">Log Out</button>
     </form>
 </header>
-<main>
+<main class="container">
     <h1>My Profile</h1>
 
 

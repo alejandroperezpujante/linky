@@ -7,11 +7,11 @@
     <title>Linky</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
-        @vite(['resources/css/app.css'])
+        @vite(['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'])
     @endif
 </head>
-<body>
-<header>
+<body class="container-fluid">
+<header class="app-header">
     <h2>Linky</h2>
     <form action="{{ route('logout') }}" method="post">
         @csrf
@@ -21,7 +21,7 @@
     </form>
 </header>
 
-<main>
+<main class="container">
     <h1>New Link</h1>
     <a href="{{ route('dashboard') }}">
         Go to Dashboard
