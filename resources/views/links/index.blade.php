@@ -28,7 +28,7 @@
                 <table>
                     <thead>
                     <tr>
-                        <th>Title</th>
+                        <th>Name</th>
                         <th>URL</th>
                         <th>Short Code</th>
                         <th>Created</th>
@@ -38,7 +38,7 @@
                     <tbody>
                     @foreach($links as $link)
                         <tr>
-                            <td>{{ $link->title }}</td>
+                            <td>{{ $link->name }}</td>
                             <td>
                                 <a href="{{ $link->original_url }}" target="_blank">
                                     {{ Str::limit($link->original_url, 50) }}
