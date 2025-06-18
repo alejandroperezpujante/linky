@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Link;
 use Illuminate\Http\Request;
+use App\Jobs\IncrementLinkUsage;
 
 class LinkController
 {
@@ -21,7 +22,7 @@ class LinkController
             abort(423);
         }
 
-        $link->incrementUsage();
+        IncrementLinkUsage::dispatch($link->id);
         return redirect()->away($link->original_url);
     }
 }
