@@ -10,11 +10,11 @@
     @endif
 </head>
 <body>
-    <div class="container" style="text-align:center; margin-top:10vh;">
+    <main class="container" style="text-align:center; margin-top:10vh;">
         <h1>404</h1>
         <h2>Link Not Found</h2>
         <p>The link you are looking for does not exist or may have been removed.</p>
-        <a href="/" class="btn btn-primary">Go to Home</a>
-    </div>
+        <a href="{{ route('landing') }}">Go to Home</a>
+    </main>
 </body>
 </html> 

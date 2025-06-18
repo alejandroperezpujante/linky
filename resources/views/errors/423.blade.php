@@ -11,11 +11,11 @@
     @endif
 </head>
 <body>
-    <div class="container" style="text-align:center; margin-top:10vh;">
+    <main class="container" style="text-align:center; margin-top:10vh;">
         <h1>423</h1>
         <h2>Link Inactive</h2>
         <p>This link is currently inactive or locked by the owner.</p>
-        <a href="/" class="btn btn-primary">Go to Home</a>
-    </div>
+        <a href="{{ route('landing') }}">Go to Home</a>
+    </main>
 </body>
 </html> 
