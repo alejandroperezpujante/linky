@@ -15,11 +15,11 @@ class LinkController
     {
         $link = Link::where('short_code', $short_code)->first();
         if (! $link) {
-            abort(404);
+            return view('errors.404');
         }
 
         if ($link->isInactive()) {
-            abort(423);
+            return view('errors.423');
         }
 
         IncrementLinkUsage::dispatch($link->id);
