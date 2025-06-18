@@ -21,6 +21,7 @@ class LinkController
             abort(423);
         }
 
+        $link->incrementUsage();
         return redirect()->away($link->original_url);
     }
 }

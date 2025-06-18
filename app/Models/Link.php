@@ -22,7 +22,8 @@ class Link extends Model
         'original_url',
         'short_code',
         'status',
-        'user_id'
+        'user_id',
+        'usage_count'
     ];
 
     /**
@@ -50,5 +51,15 @@ class Link extends Model
     public function isInactive()
     {
         return $this->status === LinkStatus::INACTIVE;
+    }
+
+    /**
+     * Increment the usage count for this link.
+     *
+     * @return void
+     */
+    public function incrementUsage(): void
+    {
+        $this->increment('usage_count');
     }
 }

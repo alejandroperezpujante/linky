@@ -36,6 +36,7 @@
                     <th>Short Code</th>
                     <th>Status</th>
                     <th>Created</th>
+                    <th>Usage</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -70,6 +71,9 @@
                         </td>
                         <td>
                             {{ $link->created_at->diffForHumans() }}
+                        </td>
+                        <td>
+                            {{ $link->usage_count }}
                         </td>
                         <td class="table-actions">
                             <form method="POST" action="{{ route('links.destroy', $link) }}" style="display: inline;">

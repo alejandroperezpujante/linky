@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('original_url');
             $table->string('short_code');
             $table->enum('status', LinkStatus::values());
+            $table->unsignedBigInteger('usage_count')->default(0);
             $table->timestamps();
         });
     }
