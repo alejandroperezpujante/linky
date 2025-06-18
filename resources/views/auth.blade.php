@@ -15,7 +15,7 @@
     <p>Enter your account credentials bellow.</p>
     <p>If you don't have an user yet, one will be created.</p>
 
-    <form action="{{ route('auth') }}" method="post">
+    <form action="{{ route('login') }}" method="post">
         @csrf
 
         <label for="email">Email</label>

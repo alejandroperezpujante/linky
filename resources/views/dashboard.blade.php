@@ -12,9 +12,12 @@
 </head>
 <body>
 <main>
-    <p>
-        Welcome {{ auth()->user()->email }}
-    </p>
+    <header>
+        <h2>Linky</h2>
+        <p>
+            Welcome {{ auth()->user()->email }}
+        </p>
+    </header>
 
     <form action="{{ route('logout') }}" method="post">
         @csrf
@@ -22,6 +25,53 @@
 
         <button type="submit">Log Out</button>
     </form>
+
+    <div>
+        <h2>Your Recent Links</h2>
+
+        @if($links->count() > 0)
+            <table>
+                <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>URL</th>
+                    <th>Short Code</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($links as $link)
+                    <tr>
+                        <td>{{ $link->title }}</td>
+                        <td>
+                            <a href="{{ $link->original_url }}" target="_blank">
+                                {{ Str::limit($link->original_url, 50) }}
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{ url($link->short_code) }}" target="_blank">
+                                {{ $link->short_code }}
+                            </a>
+                        </td>
+                        <td>{{ $link->created_at->diffForHumans() }}</td>
+                        <td>
+                            <a href="{{ route('links.edit', $link) }}">Edit</a>
+                            <form method="POST" action="{{ route('links.destroy', $link) }}" style="display: inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        @else
+            <p>You haven't created any links yet.</p>
+            <a href="{{ route('links.create') }}">Create your first link</a>
+        @endif
+    </div>
 </main>
 </body>
 </html>
