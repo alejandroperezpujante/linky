@@ -1,2 +1,13 @@
 User-agent: *
-Disallow:
+# Allow landing page and external links
+Allow: /
+Allow: /link/
+
+# Disallow sensitive/user-specific routes
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /links
+Disallow: /links/
+Disallow: /links/*
+Disallow: /login
+Disallow: /logout
