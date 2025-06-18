@@ -1,5 +1,3 @@
-@use('\App\LinkStatus')
-
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -82,6 +80,7 @@
                     @endforeach
                     </tbody>
                 </table>
+                {{ $links->links() }}
             @else
                 <p>You haven't created any links yet.</p>
                 <a href="{{ route('links.create') }}">Create your first link</a>

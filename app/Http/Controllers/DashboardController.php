@@ -13,10 +13,7 @@ class DashboardController
     public function __invoke(Request $request)
     {
         $user = $request->user();
-        $links = Link::where('user_id', $user->id)
-            ->latest()
-            ->take(5)
-            ->get();
+        $links = $user->links()->latest()->limit(5)->get();
 
         return view('dashboard', [
             'user' => $user,

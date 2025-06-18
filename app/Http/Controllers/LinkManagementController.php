@@ -12,7 +12,7 @@ class LinkManagementController
 {
     public function index()
     {
-        $links = Link::latest()->get();
+        $links = Link::latest()->simplePaginate(5);
 
         return view('links.index', ['links' => $links]);
     }

@@ -2,10 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\Link;
+use App\Models\User;
+use App\LinkStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Link>
+ * @extends Factory<Link>
  */
 class LinkFactory extends Factory
 {
@@ -17,7 +21,19 @@ class LinkFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => implode(' ', fake()->words()),
+            'original_url' =>  fake()->url(),
+            'short_code' => Str::random(8),
+            'status' => fake()->randomElement(LinkStatus::values()),
         ];
+    }
+
+    public function withUser()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'user_id' => User::factory(),
+            ];
+        });
     }
 }
