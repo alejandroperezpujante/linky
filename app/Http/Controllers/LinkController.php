@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Link;
 use Illuminate\Http\Request;
 use App\Jobs\IncrementLinkUsage;
+use Illuminate\Support\Facades\Gate;
 
 class LinkController
 {
@@ -18,7 +19,7 @@ class LinkController
             return view('errors.404');
         }
 
-        if ($link->isInactive()) {
+        if (Gate::denies('follow', $link)) {
             return view('errors.423');
         }
 

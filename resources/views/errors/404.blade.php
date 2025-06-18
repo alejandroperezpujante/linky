@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 Not Found</title>
-    
+
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'vendor/picocss/pico/css/pico.css'])
     @endif
@@ -17,4 +17,4 @@
         <a href="{{ route('landing') }}">Go to Home</a>
     </main>
 </body>
-</html> 
+</html>

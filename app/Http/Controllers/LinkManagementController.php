@@ -7,6 +7,7 @@ use App\Models\Link;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class LinkManagementController
 {
@@ -34,7 +35,7 @@ class LinkManagementController
             'status' => ['required', Rule::enum(LinkStatus::class)],
         ]);
 
-        $link = Link::create([
+        Link::create([
             'name' => $request->name,
             'original_url' => $request->original_url,
             'status' => $request->status,
@@ -47,9 +48,7 @@ class LinkManagementController
 
     public function edit(Request $request, Link $link)
     {
-        if ($link->user_id !== $request->user()->id) {
-            abort(403);
-        }
+        Gate::authorize('edit', $link);
 
         $status_options = LinkStatus::forSelect();
         return view('links.edit', [
@@ -60,10 +59,12 @@ class LinkManagementController
 
     public function update(Request $request, $id)
     {
-        $link = Link::findOrFail($id);
-        if ($link->user_id !== $request->user()->id) {
-            abort(403);
+        $link = Link::find($id);
+        if (! $link) {
+            return view('errors.404');
         }
+
+        Gate::authorize('update', $link);
 
         $request->validate([
             'name' => 'required|string|max:255',
@@ -79,9 +80,7 @@ class LinkManagementController
 
     public function destroy(Request $request, Link $link)
     {
-        if ($link->user_id !== $request->user()->id) {
-            abort(403);
-        }
+        Gate::authorize('delete', $link);
 
         $link->delete();
 
