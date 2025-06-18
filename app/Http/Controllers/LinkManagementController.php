@@ -42,8 +42,7 @@ class LinkManagementController
             'user_id' => auth()->id(),
         ]);
 
-        return to_route('links.index')
-            ->with('success', 'Link created successfully.');
+        return to_route('links.index');
     }
 
     public function edit(Request $request, Link $link)
@@ -86,6 +85,6 @@ class LinkManagementController
 
         $link->delete();
 
-        return to_route('links.index')->with('success', 'Link deleted successfully');
+        return back();
     }
 }

@@ -42,7 +42,7 @@ trait SelectableEnum
      * @param self $case
      * @return string
      */
-    protected static function getLabel(self $case): string
+    public static function getLabel(self $case): string
     {
         // Default: convert snake_case/kebab-case to Title Case
         return str_replace(['_', '-'], ' ', ucwords($case->value, '_-'));

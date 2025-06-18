@@ -1,3 +1,5 @@
+@use('\App\LinkStatus')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -31,6 +33,7 @@
                         <th>Name</th>
                         <th>URL</th>
                         <th>Short Code</th>
+                        <th>Status</th>
                         <th>Created</th>
                         <th>Actions</th>
                     </tr>
@@ -49,6 +52,7 @@
                                     {{ $link->short_code }}
                                 </a>
                             </td>
+                            <td>{{ LinkStatus::getLabel($link->status) }}</td>
                             <td>{{ $link->created_at->diffForHumans() }}</td>
                             <td>
                                 <a href="{{ route('links.edit', $link) }}">Edit</a>
@@ -57,6 +61,12 @@
                                     @method('DELETE')
 
                                     <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                                <form action="{{ route('links.toggle', $link) }}" method="post">
+                                    @csrf
+                                    @method('PATCH')
+
+                                    <button type="submit">Toggle Status</button>
                                 </form>
                             </td>
                         </tr>

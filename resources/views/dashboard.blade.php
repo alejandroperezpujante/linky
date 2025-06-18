@@ -1,3 +1,5 @@
+@use('\App\LinkStatus')
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -11,13 +13,9 @@
     @endif
 </head>
 <body>
-<main>
-    <header>
-        <h2>Linky</h2>
-        <p>
-            Welcome {{ auth()->user()->email }}
-        </p>
-    </header>
+<header>
+    <h2>Linky</h2>
+    <p>Welcome {{ $user->email }}</p>
 
     <form action="{{ route('logout') }}" method="post">
         @csrf
@@ -26,8 +24,10 @@
         <button type="submit">Log Out</button>
     </form>
 
-    <div>
-        <h2>Your Recent Links</h2>
+</header>
+
+<main>
+        <h1>Your Recent Links</h1>
 
         @if($links->count() > 0)
             <table>
@@ -36,6 +36,7 @@
                     <th>Name</th>
                     <th>URL</th>
                     <th>Short Code</th>
+                    <th>Status</th>
                     <th>Created</th>
                     <th>Actions</th>
                 </tr>
@@ -54,6 +55,7 @@
                                 {{ $link->short_code }}
                             </a>
                         </td>
+                        <td>{{ LinkStatus::getLabel($link->status) }}</td>
                         <td>{{ $link->created_at->diffForHumans() }}</td>
                         <td>
                             <a href="{{ route('links.edit', $link) }}">Edit</a>
@@ -61,6 +63,12 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                            </form>
+                            <form action="{{ route('links.toggle', $link) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+
+                                <button type="submit">Toggle Status</button>
                             </form>
                         </td>
                     </tr>
@@ -71,7 +79,6 @@
             <p>You haven't created any links yet.</p>
             <a href="{{ route('links.create') }}">Create your first link</a>
         @endif
-    </div>
 </main>
 </body>
 </html>
