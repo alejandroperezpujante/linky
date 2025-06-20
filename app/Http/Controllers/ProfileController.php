@@ -35,7 +35,7 @@ class ProfileController
         $user->update([
             'email' => $request->new_email,
         ]);
-        return to_route('profile');
+        return back();
     }
 
     // Update password

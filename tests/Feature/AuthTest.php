@@ -31,6 +31,7 @@ test('existing user logs in', function () {
         'email' => $user->email,
         'password' => 'password'
     ])->assertRedirectToRoute('dashboard');
+
     assertAuthenticatedAs($user);
 });
 
